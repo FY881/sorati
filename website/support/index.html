@@ -1,0 +1,61 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دعم سعراتي AI — Sorati</title><meta name="description" content="مساعد دعم سعراتي الذكي: اسأل عن أي حاجة في التطبيق، أو اطلب كود فتح لو نسختك اتقفلت.">
+<link rel="icon" href="/favicon.ico"><meta name="theme-color" content="#04110c">
+<style>
+:root{--g:#10b981;--g2:#34d399;--au:#f5c451;--bg:#06100b;--card:#0c1912;--ln:#ffffff14;--mu:#a7b8ae}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 90% at 80% -10%,#0c241a,#06100b 60%);color:#e8f1ec;font-family:system-ui,"Segoe UI",Tahoma,sans-serif;min-height:100vh}
+a{color:var(--au);text-decoration:none}.w{max-width:760px;margin:0 auto;padding:22px 18px 80px}
+nav{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--ln)}nav b{font-size:18px}nav .sp{margin-inline-start:auto;display:flex;gap:14px;font-size:14px}
+.hero{text-align:center;padding:26px 0 14px}.badge{display:inline-flex;gap:8px;align-items:center;background:#10b98118;border:1px solid #10b98140;color:var(--g2);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700}
+h1{font-size:28px;margin:14px 0 6px}.sub{color:var(--mu);font-size:15px}
+.chat{background:var(--card);border:1px solid var(--ln);border-radius:22px;padding:16px;margin-top:20px}
+.log{display:flex;flex-direction:column;gap:10px;min-height:220px;max-height:46vh;overflow:auto;padding:4px}
+.b{max-width:85%;padding:11px 14px;border-radius:16px;line-height:1.7;font-size:14.5px;white-space:pre-wrap}
+.b.a{align-self:flex-start;background:linear-gradient(140deg,#10381f,#0c241a);border:1px solid #10b98130;border-bottom-right-radius:4px}
+.b.u{align-self:flex-end;background:linear-gradient(140deg,#2a2410,#1a1608);border:1px solid #f5c45130;border-bottom-left-radius:4px}
+.b .av{font-size:11px;opacity:.6;margin-bottom:4px}
+.in{display:flex;gap:8px;margin-top:12px}.in input{flex:1;background:#0a130e;border:1px solid var(--ln);border-radius:14px;padding:13px;color:#fff;font-size:15px}
+button{border:none;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer;font-size:15px}
+.send{background:linear-gradient(135deg,var(--g),#0e9f6e);color:#042016}.send:disabled{opacity:.5}
+.req{background:linear-gradient(135deg,var(--au),#e0a92e);color:#1a1205;width:100%;margin-top:12px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:22px;padding:18px;margin-top:18px}
+.card h2{margin:0 0 4px;font-size:19px}.card p{color:var(--mu);font-size:14px;margin:4px 0 14px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}input,textarea{width:100%;background:#0a130e;border:1px solid var(--ln);border-radius:12px;padding:12px;color:#fff;font-size:15px;font-family:inherit}textarea{min-height:80px;resize:vertical}
+.res{margin-top:14px;border-radius:14px;padding:14px;display:none}.res.show{display:block}
+.res.ok{background:#10b98114;border:1px solid #10b98140}.res.err{background:#ef444414;border:1px solid #ef444440;color:#fca5a5}
+.code{font-family:monospace;font-size:24px;letter-spacing:3px;text-align:center;color:var(--g2);margin:8px 0}
+.poll{color:var(--mu);font-size:13px}.hide{display:none}
+footer{color:var(--mu);text-align:center;font-size:13px;padding:30px}
+</style></head><body>
+<nav><a href="/#top"><b>سعراتي</b></a><div class="sp"><a href="/releases/">الإصدارات</a><a href="/#download">تحميل</a></div></nav>
+<div class="w">
+<div class="hero"><span class="badge">🤖 دعم سعراتي AI</span><h1>اسأل، وهنساعدك فورًا</h1><p class="sub">المساعد بيعرف كل حاجة عن سعراتي. لو نسختك اتقفلت، اطلب كود فتح والإدارة هتراجع طلبك.</p></div>
+
+<div class="chat"><div class="log" id="log"></div>
+<div class="in"><input id="msg" placeholder="اكتب سؤالك… مثلاً: نسختي اتقفلت أعمل إيه؟" autocomplete="off"><button class="send" id="send">إرسال</button></div>
+<button class="req" id="openReq">🔑 اطلب كود فتح للنسخة المقفولة</button></div>
+
+<div class="card hide" id="reqCard">
+<h2>طلب كود فتح</h2><p>هيوصل طلبك للإدارة مباشرة. هتوافق وتبعتلك كود، أو ترفض. من غير أكواد وهمية.</p>
+<label>اسمك</label><input id="r_name" maxlength="60" placeholder="اسمك">
+<label>وسيلة تواصل (إيميل أو رقم واتساب)</label><input id="r_contact" maxlength="80" placeholder="للرد عليك">
+<label>التطبيق</label><select id="r_app" style="width:100%;background:#0a130e;border:1px solid var(--ln);border-radius:12px;padding:12px;color:#fff;font-size:15px"><option value="pro">سعراتي برو</option><option value="admin">سعراتي أدمن</option></select>
+<label>نسختك الحالية (لو تعرفها)</label><input id="r_vn" maxlength="12" placeholder="مثلاً 39.0">
+<label>سبب الطلب</label><textarea id="r_reason" maxlength="500" placeholder="ليه محتاج تفتح النسخة دي؟"></textarea>
+<button class="req" id="sendReq">ابعت الطلب</button>
+<div class="res" id="reqRes"></div></div>
+</div>
+<footer>© 2026 سعراتي · <a href="/">الرئيسية</a></footer>
+<script>
+var API="https://deputy.sorati-command.workers.dev/v1/app/s44";
+var P=new URLSearchParams(location.search),log=document.getElementById("log"),msgs=[];
+function esc(s){return (s||"").replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c]})}
+function add(r,t){var b=document.createElement("div");b.className="b "+r;b.innerHTML="<div class='av'>"+(r==="a"?"دعم سعراتي AI":"إنت")+"</div>"+esc(t);log.appendChild(b);log.scrollTop=log.scrollHeight;return b}
+add("a","أهلًا! أنا دعم سعراتي AI. اسألني عن أي ميزة، أو لو نسختك اتقفلت قولّي وأساعدك تطلب كود فتح.");
+async function ask(){var i=document.getElementById("msg"),t=i.value.trim();if(!t)return;i.value="";add("u",t);msgs.push({r:"u",t:t});var btn=document.getElementById("send");btn.disabled=true;var w=add("a","…");try{var r=await fetch(API+"/chat",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({msgs:msgs})});var d=await r.json();w.innerHTML="<div class='av'>دعم سعراتي AI</div>"+esc(d.t||"معلش، جرّب تاني.");msgs.push({r:"a",t:d.t||""})}catch(e){w.innerHTML="<div class='av'>دعم سعراتي AI</div>محتاج نت. جرّب تاني."}btn.disabled=false;log.scrollTop=log.scrollHeight}
+document.getElementById("send").onclick=ask;document.getElementById("msg").addEventListener("keydown",function(e){if(e.key==="Enter")ask()});
+var rc=document.getElementById("reqCard");document.getElementById("openReq").onclick=function(){rc.classList.remove("hide");if(P.get("app"))document.getElementById("r_app").value=P.get("app")==="admin"?"admin":"pro";if(P.get("vn"))document.getElementById("r_vn").value=P.get("vn");rc.scrollIntoView({behavior:"smooth"})};
+var pollT;
+document.getElementById("sendReq").onclick=async function(){var res=document.getElementById("reqRes");var body={name:document.getElementById("r_name").value,contact:document.getElementById("r_contact").value,app:document.getElementById("r_app").value,vn:document.getElementById("r_vn").value,reason:document.getElementById("r_reason").value};if((body.name||"").trim().length<2||(body.contact||"").trim().length<5){res.className="res show err";res.textContent="اكتب اسمك ووسيلة تواصل صح.";return}this.disabled=true;this.textContent="بنبعت…";try{var r=await fetch(API+"/req",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});var d=await r.json();if(d.ok){res.className="res show ok";res.innerHTML="تم إرسال طلبك ✓ رقمه <b>"+d.id+"</b>. استنى موافقة الإدارة، والصفحة هتتابع تلقائيًا.<div class='poll' id='pollMsg'>بنتابع حالة الطلب…</div>";poll(d.id,d.k)}else{res.className="res show err";res.textContent=({blocked:"معلش، محصلش. اتواصل بوسيلة تانية.",already_pending:"عندك طلب شغّال بالفعل، استنى الرد.",rate_limited:"طلبات كتير — جرّب بعد شوية.",missing:"بيانات ناقصة."}[d.error]||"حصلت مشكلة، جرّب تاني.")}}catch(e){res.className="res show err";res.textContent="محتاج نت."}this.disabled=false;this.textContent="ابعت الطلب"};
+function poll(id,k){clearInterval(pollT);var n=0;pollT=setInterval(async function(){n++;if(n>120){clearInterval(pollT);return}try{var r=await fetch(API+"/status",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({id:id,k:k})});var d=await r.json();var pm=document.getElementById("pollMsg");if(!pm)return;if(d.st==="approved"){clearInterval(pollT);pm.innerHTML="<b style='color:#34d399'>اتوافق ✓</b> كود الفتح بتاعك:<div class='code'>"+d.code+"</div>افتح التطبيق، اكتبه في خانة «كلمة سر من الإدارة».";}else if(d.st==="rejected"){clearInterval(pollT);pm.innerHTML="<b style='color:#fca5a5'>الطلب اترفض.</b> اتواصل مع الإدارة لو محتاج.";}else if(d.st==="blocked"){clearInterval(pollT);pm.textContent="الطلب اتقفل.";}}catch(e){}},5000)}
+</script><script src="/a/force37.js?v=48" data-site="48" defer></script></body></html>

@@ -1,0 +1,22 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>سجل التحديثات · سعراتي برو</title><meta name="description" content="آخر إصدارات سعراتي برو وسعراتي أدمن، متزامنة مع التطبيقين.">
+<link rel="icon" href="/favicon.ico"><meta name="theme-color" content="#04110c">
+<style>@font-face{font-family:Plex;src:url(/a/ar400.woff2) format("woff2");font-weight:400}@font-face{font-family:Plex;src:url(/a/ar700.woff2) format("woff2");font-weight:700}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font:400 16px/1.7 Plex,system-ui,sans-serif;color:#e8fff5;background:#030b08 url(/c/hall-1280.webp) center/cover fixed}
+body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,rgba(3,11,8,.72),rgba(3,11,8,.94));z-index:-1}
+main{max-width:760px;margin:0 auto;padding:48px 20px 80px}a{color:#6ee7b7}.top{display:flex;align-items:center;gap:12px;margin-bottom:28px}.top img{width:44px;height:44px}
+h1{font-size:clamp(30px,7vw,46px);margin:0 0 6px;line-height:1.2}h1 b{color:#f5c76b}.sub{color:#a8c7ba;margin:0 0 30px}
+.rel{border:1px solid rgba(245,199,107,.28);background:linear-gradient(135deg,rgba(18,40,30,.85),rgba(6,18,13,.9));border-radius:24px;padding:22px;margin-bottom:18px;backdrop-filter:blur(8px)}
+.rel h2{margin:0;font-size:22px}.rel h2 span{color:#f5c76b}.meta{color:#86a99b;font-size:13px;margin:4px 0 12px}.rel ul{margin:0;padding-inline-start:20px}.rel li{margin:4px 0}
+.btn{display:inline-flex;margin-top:14px;padding:11px 20px;border-radius:99px;font-weight:700;text-decoration:none;color:#02140d;background:linear-gradient(135deg,#a7f3d0,#34d399 45%,#10b981)}
+code{font-size:11px;color:#86a99b;word-break:break-all}.empty{color:#a8c7ba}</style></head><body><main>
+<div class="top"><img src="/a/mark-192.png" alt=""><a href="/">سعراتي برو</a></div>
+<h1>سجل <b>التحديثات</b></h1><p class="sub">كل إصدار بينزل هنا وفي التطبيقين في نفس اللحظة.</p>
+<div id="list"><p class="empty">بيحمّل…</p></div></main>
+<script>
+(async()=>{const L=document.getElementById("list"),esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+try{const r=await(await fetch("/release.json?t="+Date.now(),{cache:"no-store"})).json();const N={pro:"سعراتي برو",admin:"سعراتي أدمن"};
+L.innerHTML=["pro","admin"].filter(k=>r[k]).map(k=>{const x=r[k],d=x.date?new Date(x.date).toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric"}):"";
+return `<section class="rel"><h2>${N[k]} <span>${esc(x.vn)}</span></h2><div class="meta">${esc(d)}${x.size?" · "+(x.size/1048576).toLocaleString("ar-EG",{maximumFractionDigits:1})+" ميجا":""}</div><ul>${(x.notes||[]).map(n=>`<li>${esc(n)}</li>`).join("")}</ul>${k==="pro"?`<a class="btn" href="${esc(x.url)}">حمّل ${esc(x.vn)}</a>`:""}<p><code>SHA-256: ${esc(x.sha256)}</code></p></section>`}).join("")||'<p class="empty">مفيش إصدارات لسه.</p>'}
+catch(e){L.innerHTML='<p class="empty">مقدرناش نجيب السجل دلوقتي.</p>'}})();
+</script><script src="/a/force37.js?v=48" data-site="48" defer></script></body></html>
